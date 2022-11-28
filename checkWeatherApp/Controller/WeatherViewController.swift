@@ -1,37 +1,32 @@
 //
-//  WeatherViewController.swift
+//  ViewController.swift
 //  checkWeatherApp
 //
-//  Created by MACBOOK PRO on 11/28/22.
+//  Created by MACBOOK PRO on 11/25/22.
 //
 
-import Foundation
 import UIKit
 
 class WeatherViewController: UIViewController {
     
     var city : String?
 
-    @IBOutlet var tv_desc: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var tempt: UILabel!
+    @IBOutlet weak var humidity: UILabel!
     
-    @IBOutlet var tv_humidity: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    @IBOutlet var tv_temp: UILabel!
-    
-    @IBOutlet var img_icon: UIImageView!
-    
-    @IBOutlet var feels_like: UILabel!
-    
-    var imgUrl=""
+    var imgUrl = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = city
         fetchWeatherData()
         // Do any additional setup after loading the view.
     }
     
     func fetchWeatherData(){
+        self.activityIndicator.startAnimating()
             let manager = WeatherService()
         manager.fetchWeatherData(city: city ?? "", completionHandler: {
                 (data) in
@@ -40,19 +35,23 @@ class WeatherViewController: UIViewController {
                     print("data in weather : \(data.name) ")
                    // self.tableView.reloadData()
                     
-                    self.tv_desc.text = data.weather[0].main
-                    self.tv_humidity.text = "\(data.main?.humidity ?? 0.0)"
-                    self.tv_temp.text = "\(data.main?.temp ?? 0.0) ˚C"
-                    self.feels_like.text = "\(data.main?.feelsLike ?? 0.0) ˚C"
+     
+                    self.humidity.text = "\(data.main?.humidity ?? 0.0)"
+                    self.tempt.text = "\(data.main?.temp ?? 0.0) ˚C"
+                  
                     let icon = data.weather[0].icon
                     self.imgUrl = "https://openweathermap.org/img/wn/\(icon).png"
                     //loadIcon(img:imgUrl)
-                    img_icon.imageFromServerURL(urlString: imgUrl)
+                    imageView.imageFromServerURL(urlString: imgUrl)
                 }
             }
+                                 
+       
         )
+        self.activityIndicator.stopAnimating()
     }
 
+    
 }
 extension UIImageView {
     public func imageFromServerURL(urlString: String) {
@@ -69,6 +68,6 @@ extension UIImageView {
             })
 
         }).resume()
-    }
-    
-}
+    }}
+
+

@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import CoreData
 import UIKit
 
+var allCity : [CityDb] = [CityDb]()
 
 class InitialViewController: UITableViewController {
 
@@ -15,7 +17,7 @@ class InitialViewController: UITableViewController {
     
     @IBOutlet var searchBar: UISearchBar!
     
-    var allCity : [CityDb] = [CityDb]()
+   
         
     var myFetchResultsController = CoreDataManager.shared.myFetchResultsController
     
@@ -81,6 +83,7 @@ class InitialViewController: UITableViewController {
     
     func fetchAllCity()
     {
+        
         allCity = CoreDataManager.shared.fetchCityFromCoreData()
         tableView.reloadData()
     }
@@ -98,7 +101,6 @@ extension InitialViewController : UISearchBarDelegate{
             fetchAllCity()
         }
         else {
-         //myFetchResultsController.fetchRequest = CoreDataManager.shared.search(text: searchText)
             allCity = CoreDataManager.shared.search(text: searchText)
             tableView.reloadData()
 

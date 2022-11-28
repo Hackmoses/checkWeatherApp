@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import UIKit
 import CoreData
 
 class CoreDataManager {
+    
     
     static var shared = CoreDataManager()
     
@@ -19,13 +21,27 @@ class CoreDataManager {
     
     //simple insert into coredata
     func insertCity(city : String,country:String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+        
         if !isInsertedBefore(name: city){
-        let c = CityDb(context: persistentContainer.viewContext)
-        c.cityName = city
-        c.countryName = country
-        saveContext()
+        let entity = NSEntityDescription.entity(forEntityName: "CityDb", in: context)
+            
+        let aCity = CityDb(entity: entity!, insertInto: context)
+        aCity.cityName = city
+        aCity.countryName = country
+        
+            do {
+                try context.save()
+            }
+            catch {
+                print("Note Save Error")
+                allCity.append(aCity)
+            }
+            
         }
     }
+    
     //to check wheter we inserted city already or not
     func isInsertedBefore(name: String) -> Bool {
         let fetch: NSFetchRequest = CityDb.fetchRequest()

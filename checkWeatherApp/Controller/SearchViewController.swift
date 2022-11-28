@@ -10,12 +10,15 @@ import UIKit
 
 class SearchViewController: UITableViewController,UISearchBarDelegate,ServiceDelegate {
    
+    @IBOutlet weak var searchBar: UISearchBar!
+
+    
     var cityList : [String] = [String]()
     
     
     override func viewDidLoad() {
+        searchBar.delegate = self
         super.viewDidLoad()
-
     }
 
     func ServiceDelegateDidFinishWithList(list: [String]) {
@@ -25,13 +28,21 @@ class SearchViewController: UITableViewController,UISearchBarDelegate,ServiceDel
         }
     }
     
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
             print(searchText)
         Service.shared.delegate = self
-        Service.shared.fetchJSONData(searchText: searchText)
-    }
-    override func numberOfSections(in tableView: UITableView) -> Int {
+        Service.shared.fetchJSONData(searchText: searchText) 
+        tableView.reloadData()
+        /*
         
+         */
+    }
+     
+    
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+
         return 1
     }
 
@@ -40,12 +51,11 @@ class SearchViewController: UITableViewController,UISearchBarDelegate,ServiceDel
         return cityList.count
     }
 
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath)
+       let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath)
 
-
-        let array = cityList[indexPath.row].components(separatedBy: ",")
+       let array = cityList[indexPath.row].components(separatedBy: ",")
         if(array.count>1){
             print(cityList[indexPath.row])
             cell.textLabel?.text = array[0]
@@ -54,7 +64,9 @@ class SearchViewController: UITableViewController,UISearchBarDelegate,ServiceDel
             cell.textLabel?.text = ""
             cell.detailTextLabel?.text = ""
         }
+        
         return cell
+        
     }
     
     
@@ -74,6 +86,7 @@ class SearchViewController: UITableViewController,UISearchBarDelegate,ServiceDel
                let action = UIAlertAction.init(title: "Add", style: .default) { (action) in
                  
                 CoreDataManager.shared.insertCity(city: city,country:country)
+               
                 self.navigationController?.popViewController(animated: true)
                 }
                let cancelAction = UIAlertAction.init(title: "Cancel", style: .default) { (action) in

@@ -48,7 +48,7 @@ class Service {
                                print(error)
                                return
                            }
-                           
+                         
                            // We want to ensure that we have a good HTTP response status
                            guard let httpResponse = response as? HTTPURLResponse,
                                (200...299).contains(httpResponse.statusCode)
@@ -103,4 +103,5 @@ class Service {
             }
         
     }
+
 
