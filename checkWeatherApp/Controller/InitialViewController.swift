@@ -19,6 +19,7 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
     @IBOutlet var searchBar: UISearchBar!
     
     //var dataController : DataController!
+
     
     var fetchedResultsController: NSFetchedResultsController<CityDb>!
         
@@ -35,10 +36,12 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
        // self.tableView.register(initialTableViewCell.self, forCellReuseIdentifier: "cell")
        
     }
-    
+
    override func numberOfSections(in tableView: UITableView) -> Int {
        // #warning Incomplete implementation, return the number of sections
-       return fetchedResultsController.sections?.count ?? 1
+     
+           return fetchedResultsController.sections?.count ?? 1
+       
 
    }
 
@@ -46,6 +49,8 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
        // #warning Incomplete implementation, return the number of rows
         setUpFetchedResultController()
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+       
+       
    }
   
     
@@ -60,20 +65,7 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     print("loaded :\(indexPath)")
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! initialTableViewCell
-      /*
-       let fetchRequest: NSFetchRequest<CityDb> = CityDb.fetchRequest()
-       
-       let allCity = fetchedResultsController.object(at : indexPath)
-       
-       
-       do {
-          
-           try self.dataController.viewContext.save()
-       } catch {
-           fatalError("Unable to save city Weather: \(error.localizedDescription)")
-       }
-       */
-    
+      
     cell.setData(model: fetchedResultsController.object(at: indexPath))
     return cell
      
@@ -112,7 +104,7 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
     func setUpFetchedResultController(){
         
         let fetchRequest : NSFetchRequest<CityDb> = CityDb.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "cityName", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "cityName", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let newContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
@@ -128,10 +120,12 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
             fatalError("Request failed:\(error.localizedDescription)")
         }
         
+        
+        
 }
+    
 
 }
-
 extension InitialViewController {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

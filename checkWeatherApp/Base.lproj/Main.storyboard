@@ -12,49 +12,43 @@
         <scene sceneID="H65-dK-Egv">
             <objects>
                 <tableViewController storyboardIdentifier="InitialViewController" id="5W6-kt-cdY" customClass="InitialViewController" customModule="checkWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="zKh-mE-Q57">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="zKh-mE-Q57">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="0hs-SG-ULj">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search city" id="0hs-SG-ULj">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="barTintColor" systemColor="systemTealColor"/>
+                            <color key="barTintColor" systemColor="tertiarySystemBackgroundColor"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="70" id="Pne-Or-Ru2" customClass="initialTableViewCell" customModule="checkWeatherApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="1Sm-tZ-KAN" detailTextLabel="MAG-ar-jKy" rowHeight="70" style="IBUITableViewCellStyleSubtitle" id="Pne-Or-Ru2" customClass="initialTableViewCell" customModule="checkWeatherApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="88.5" width="414" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pne-Or-Ru2" id="WEV-nk-RBM">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isw-3f-CVR">
-                                            <rect key="frame" x="20" y="11" width="52" height="27"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Sm-tZ-KAN">
+                                            <rect key="frame" x="20" y="11.5" width="36.5" height="23"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUg-Of-IYm">
-                                            <rect key="frame" x="20" y="38" width="59" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MAG-ar-jKy">
+                                            <rect key="frame" x="20" y="38" width="53" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstItem="xUg-Of-IYm" firstAttribute="top" secondItem="isw-3f-CVR" secondAttribute="bottom" id="JTQ-ht-eSa"/>
-                                        <constraint firstItem="isw-3f-CVR" firstAttribute="top" secondItem="WEV-nk-RBM" secondAttribute="topMargin" id="ON1-Dh-vk8"/>
-                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="isw-3f-CVR" secondAttribute="trailing" id="P70-Ep-iEx"/>
-                                        <constraint firstItem="xUg-Of-IYm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WEV-nk-RBM" secondAttribute="leadingMargin" id="X0l-Ge-wfz"/>
-                                        <constraint firstItem="isw-3f-CVR" firstAttribute="leading" secondItem="WEV-nk-RBM" secondAttribute="leadingMargin" id="bd8-W0-0Ys"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="xUg-Of-IYm" secondAttribute="trailing" constant="315" id="w80-FD-VDE"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="txt_subtitle" destination="xUg-Of-IYm" id="PgZ-5s-wpy"/>
-                                    <outlet property="txt_title" destination="isw-3f-CVR" id="dle-cX-nZt"/>
+                                    <outlet property="cityLabel" destination="1Sm-tZ-KAN" id="iti-P4-fvH"/>
+                                    <outlet property="countryLabel" destination="MAG-ar-jKy" id="dqy-C5-UFm"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -87,10 +81,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="mBG-1n-fkf">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search city" id="mBG-1n-fkf">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="barTintColor" systemColor="systemTealColor"/>
+                            <color key="barTintColor" systemColor="tertiarySystemBackgroundColor"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
@@ -233,8 +227,8 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="tertiarySystemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

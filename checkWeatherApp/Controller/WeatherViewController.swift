@@ -26,7 +26,7 @@ class WeatherViewController: UIViewController {
     }
     
     func fetchWeatherData(){
-        self.activityIndicator.startAnimating()
+        
             let manager = WeatherService()
         manager.fetchWeatherData(city: city ?? "", completionHandler: {
                 (data) in
@@ -35,20 +35,21 @@ class WeatherViewController: UIViewController {
                     print("data in weather : \(data.name) ")
                    // self.tableView.reloadData()
                     
-     
+                    self.activityIndicator.startAnimating()
                     self.humidity.text = "\(data.main?.humidity ?? 0.0)"
                     self.tempt.text = "\(data.main?.temp ?? 0.0) ˚C"
-                  
                     let icon = data.weather[0].icon
                     self.imgUrl = "https://openweathermap.org/img/wn/\(icon).png"
                     //loadIcon(img:imgUrl)
+                    self.activityIndicator.stopAnimating()
                     imageView.imageFromServerURL(urlString: imgUrl)
+                 
                 }
             }
                                  
        
         )
-        self.activityIndicator.stopAnimating()
+        
     }
 
     

@@ -15,7 +15,7 @@ class WeatherService {
     func fetchWeatherData(city:String, completionHandler : @escaping (WeatherModel)->Void )  {
 
     
-                let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=b4cb98807ba7bc852f39047637f2b59e&units=metric")!
+                let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=b4cb98807ba7bc852f39047637f2b59e&units=metric")
                         
                        // Create (define) a task; remember that we are just defining it
                        // After the multi-line statement executes, "task" exists,
@@ -29,7 +29,7 @@ class WeatherService {
           
                         print(url)
         
-                       let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                       let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
                            
                            // Do two checks BEFORE attempting to extract the data from the response
                            // 1. Check whether an "error" object was passed in
