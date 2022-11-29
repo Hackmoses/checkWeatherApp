@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 import UIKit
 
+//Instance of the Database
 var allCity : [CityDb] = [CityDb]()
 
 class InitialViewController: UITableViewController {
