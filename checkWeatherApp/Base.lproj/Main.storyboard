@@ -214,6 +214,7 @@
         <scene sceneID="frV-Pi-V1X">
             <objects>
                 <navigationController id="2Eq-K2-8gZ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="6BA-UC-4t2"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vw4-cA-pxB">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

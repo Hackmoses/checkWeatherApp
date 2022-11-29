@@ -36,7 +36,7 @@ class CoreDataManager {
             }
             catch {
                 print("Note Save Error")
-                allCity.append(aCity)
+              
             }
             
         }
