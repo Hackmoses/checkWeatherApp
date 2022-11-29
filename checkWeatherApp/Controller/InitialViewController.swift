@@ -137,8 +137,27 @@ extension InitialViewController {
         }
         else {
            // allCity = CoreDataManager.shared.search(text: searchText)
-            setUpFetchedResultController()
-            tableView.reloadData()
+            //setUpFetchedResultController()
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let newContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+            let fetchRequest : NSFetchRequest<CityDb> = CityDb.fetchRequest()
+            var predicate:NSPredicate = NSPredicate()
+            predicate = NSPredicate(format: "tags CONTAINS[cd] %@", searchBar.text!)
+            let sortDescriptor = NSSortDescriptor(key: "cityName", ascending: true)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            fetchedResultsController?.fetchRequest.predicate = predicate
+            
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: newContext, sectionNameKeyPath: "cityName", cacheName:"cityName")
+            
+            
+            do{
+                print("Searching data data")
+                try fetchedResultsController?.performFetch()
+                tableView.reloadData()
+            }catch{
+                print("Error")
+            }
+            
 
         }
     }

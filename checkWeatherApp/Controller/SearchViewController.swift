@@ -38,8 +38,6 @@ class SearchViewController: UITableViewController,UISearchBarDelegate,ServiceDel
         
          */
     }
-     
-    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
 

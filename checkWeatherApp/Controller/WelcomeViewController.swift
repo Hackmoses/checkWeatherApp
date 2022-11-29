@@ -22,16 +22,17 @@ class WelcomeViewController : UIViewController {
         
     }()
     
-    
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       /*
         view.addSubview(aButton)
         aButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         aButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         aButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
         aButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         // Do any additional setup after loading the view.
+        */
     }
-    */
+    
 }
