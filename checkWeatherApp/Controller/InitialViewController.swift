@@ -142,7 +142,7 @@ extension InitialViewController {
             let newContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
             let fetchRequest : NSFetchRequest<CityDb> = CityDb.fetchRequest()
             var predicate:NSPredicate = NSPredicate()
-            predicate = NSPredicate(format: "tags CONTAINS[cd] %@", searchBar.text!)
+            predicate = NSPredicate(format: "name LIKE %@", searchBar.text!)
             let sortDescriptor = NSSortDescriptor(key: "cityName", ascending: true)
             fetchRequest.sortDescriptors = [sortDescriptor]
             fetchedResultsController?.fetchRequest.predicate = predicate
