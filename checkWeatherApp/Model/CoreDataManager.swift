@@ -11,6 +11,7 @@ import CoreData
 
 class CoreDataManager {
     
+    var dataController : DataController!
     
     static var shared = CoreDataManager()
     
@@ -21,25 +22,38 @@ class CoreDataManager {
     
     //simple insert into coredata
     func insertCity(city : String,country:String) {
+       /*
+        let allCity = CityDb(context: self.dataController!.viewContext)
+        allCity.cityName = city
+        allCity.countryName = country
+        
+        do {
+            try self.dataController?.viewContext.save()
+        } catch {
+            fatalError("Unable to save photos: \(error.localizedDescription)")
+        }
+       */
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         
         if !isInsertedBefore(name: city){
         let entity = NSEntityDescription.entity(forEntityName: "CityDb", in: context)
             
-        let aCity = CityDb(entity: entity!, insertInto: context)
-        aCity.cityName = city
-        aCity.countryName = country
+        let allCity = CityDb(entity: entity!, insertInto: context)
+        allCity.cityName = city
+        allCity.countryName = country
         
             do {
                 try context.save()
             }
             catch {
-                print("Note Save Error")
+                print("Weather Save Error")
               
             }
             
         }
+       
     }
     
     //to check wheter we inserted city already or not
@@ -88,6 +102,7 @@ class CoreDataManager {
         return result
     }
     
+    
     lazy var myFetchResultsController : NSFetchedResultsController<CityDb> = {
        //fetch
         let fetch : NSFetchRequest<CityDb> = CityDb.fetchRequest()
@@ -100,6 +115,8 @@ class CoreDataManager {
         //fetchcontroller
         
     }()
+    
+    
     
     
     // MARK: - Core Data stack

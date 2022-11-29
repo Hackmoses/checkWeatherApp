@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 import UIKit
 
-//Instanc/Users/macbookpro/Documents/Udacity/checkWeatherApp/checkWeatherApp/Controller/InitialTableViewCell.swifte of the Database
+//Instance of the Database
 var allCity : [CityDb] = [CityDb]()
 
 class InitialViewController: UITableViewController,NSFetchedResultsControllerDelegate, UISearchBarDelegate {
@@ -18,7 +18,7 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
     
     @IBOutlet var searchBar: UISearchBar!
     
-    var dataController : DataController!
+    //var dataController : DataController!
     
     var fetchedResultsController: NSFetchedResultsController<CityDb>!
         
@@ -60,8 +60,23 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     print("loaded :\(indexPath)")
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! initialTableViewCell
+      /*
+       let fetchRequest: NSFetchRequest<CityDb> = CityDb.fetchRequest()
+       
+       let allCity = fetchedResultsController.object(at : indexPath)
+       
+       
+       do {
+          
+           try self.dataController.viewContext.save()
+       } catch {
+           fatalError("Unable to save city Weather: \(error.localizedDescription)")
+       }
+       */
+    
     cell.setData(model: fetchedResultsController.object(at: indexPath))
     return cell
+     
    }
    
 
@@ -99,17 +114,20 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
         let fetchRequest : NSFetchRequest<CityDb> = CityDb.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "cityName", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
-        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let newContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+        /*
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         dataController = appDelegate.dataController
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: "cityName", cacheName: "cityName")
+         */
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: newContext, sectionNameKeyPath: "cityName", cacheName: nil)
         fetchedResultsController.delegate = self
         do {
             try? fetchedResultsController.performFetch()
         } catch {
             fatalError("Request failed:\(error.localizedDescription)")
         }
+        
 }
 
 }
@@ -130,6 +148,7 @@ extension InitialViewController {
 
         }
     }
+    
     
 }
     

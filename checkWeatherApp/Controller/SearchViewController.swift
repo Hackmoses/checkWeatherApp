@@ -86,7 +86,7 @@ class SearchViewController: UITableViewController,UISearchBarDelegate,ServiceDel
                let action = UIAlertAction.init(title: "Add", style: .default) { (action) in
                  
                 CoreDataManager.shared.insertCity(city: city,country:country)
-               
+                   self.tableView.reloadData()
                 self.navigationController?.popViewController(animated: true)
                 }
                let cancelAction = UIAlertAction.init(title: "Cancel", style: .default) { (action) in
