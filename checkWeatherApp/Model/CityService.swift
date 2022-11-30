@@ -27,10 +27,11 @@ class Service {
         
         print(url)
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
             
-            
+          //If you are in need  a response stautus
             // We want to ensure that we have a good HTTP response status
+            /*
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode)
             else {
@@ -40,7 +41,7 @@ class Service {
                 }
                 return
             }
-            
+            */
             guard let data = data else {
                 DispatchQueue.main.async {
                     completionHandler(error)

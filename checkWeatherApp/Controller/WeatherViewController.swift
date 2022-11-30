@@ -26,7 +26,7 @@ class WeatherViewController: UIViewController {
     }
     
     func fetchWeatherData(){
-        
+        self.activityIndicator.startAnimating()
         let manager = WeatherService()
         manager.fetchWeatherData(city: city ?? "", completionHandler: {
             
@@ -34,7 +34,9 @@ class WeatherViewController: UIViewController {
             
             if let error = error {
                 print("error:\(String(describing: error.localizedDescription))")
-                self.activityIndicator.stopAnimating()
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                }
                 let alert = UIAlertController.init(title: "Connection failed", message: "Check you network connection", preferredStyle: .alert)
                 let cancelAction = UIAlertAction.init(title: "Retry", style: .default)
                 alert.addAction(cancelAction)
@@ -42,31 +44,34 @@ class WeatherViewController: UIViewController {
                 print(error)
                 return
             }
-            
-            DispatchQueue.main.async { [self] in
-                // self.list = employees
-                print("data in weather : \(data.name) ")
-                // self.tableView.reloadData()
+            if let data = data {
                 
-                self.activityIndicator.startAnimating()
-                self.humidity.text = "\(data.main?.humidity ?? 0.0) ˚C"
-                self.tempt.text = "\(data.main?.temp ?? 0.0) ˚C"
-                let icon = data.weather[0].icon
-                self.imgUrl = "https://openweathermap.org/img/wn/\(icon).png"
-                //loadIcon(img:imgUrl)
-                self.activityIndicator.stopAnimating()
-                imageView.imageFromServerURL(urlString: imgUrl)
-                
+                do{
+                    DispatchQueue.main.async { [self] in
+                        
+                        print("data in weather : \(data.name) ")
+                        self.humidity.text = "\(data.main?.humidity ?? 0.0) ˚C"
+                        self.tempt.text = "\(data.main?.temp ?? 0.0) ˚C"
+                        let icon = data.weather[0].icon
+                        self.imgUrl = "https://openweathermap.org/img/wn/\(icon).png"
+                        //loadIcon(img:imgUrl)
+                        self.activityIndicator.stopAnimating()
+                        imageView.imageFromServerURL(urlString: imgUrl)
+                    }
+                }catch {
+                    fatalError("Unable to view weather details")
+                    
+                }
             }
+            
         }
-                                 
                                  
         )
         
     }
     
-    
 }
+
 
 
 extension UIImageView {
@@ -84,6 +89,6 @@ extension UIImageView {
             })
             
         }).resume()
-    }}
-
-
+    }
+    
+}

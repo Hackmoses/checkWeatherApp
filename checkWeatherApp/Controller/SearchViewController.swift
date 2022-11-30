@@ -41,7 +41,9 @@ class SearchViewController: UITableViewController,UISearchBarDelegate,ServiceDel
             
             if let error = error {
                 print("error:\(String(describing: error.localizedDescription))")
-                self.activityIndicator.stopAnimating()
+                DispatchQueue.main.async {
+                                    self.activityIndicator.stopAnimating()
+                                }
                 let alert = UIAlertController.init(title: "Connection failed", message: "Check you network connection", preferredStyle: .alert)
                 let cancelAction = UIAlertAction.init(title: "Retry", style: .default)
                 alert.addAction(cancelAction)

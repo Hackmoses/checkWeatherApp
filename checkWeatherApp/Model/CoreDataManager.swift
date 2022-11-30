@@ -22,18 +22,7 @@ class CoreDataManager {
     
     //simple insert into coredata
     func insertCity(city : String,country:String) {
-       /*
-        let allCity = CityDb(context: self.dataController!.viewContext)
-        allCity.cityName = city
-        allCity.countryName = country
-        
-        do {
-            try self.dataController?.viewContext.save()
-        } catch {
-            fatalError("Unable to save photos: \(error.localizedDescription)")
-        }
-       */
-        
+       
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         

@@ -12,13 +12,8 @@ import Foundation
 class WeatherService {
 
 
-    func fetchWeatherData(city:String, completionHandler : @escaping (WeatherModel, Error? )->Void )  {
+    func fetchWeatherData(city:String, completionHandler : @escaping (WeatherModel?, Error? )->Void )  {
 
-        /*let stringUrl = "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=b4cb98807ba7bc852f39047637f2b59e&units=metric".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-         
-         var url = URL(string:stringUrl)!
-        
-         */
         
         var urlString = city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
     
@@ -30,8 +25,7 @@ class WeatherService {
                            
                          
                            if let error = error {
-                                print("error in url session")
-                               print(error)
+                               completionHandler(nil, error)
                                return
                            }
                            
@@ -68,7 +62,7 @@ class WeatherService {
                                }
                                catch {
                                     print("error exception in url session")
-                                print(error)
+                                    completionHandler(nil, error)
                                }
                            }
                        }
