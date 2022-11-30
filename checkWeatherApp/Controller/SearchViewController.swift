@@ -27,6 +27,7 @@ class SearchViewController: UITableViewController,UISearchBarDelegate,ServiceDel
         DispatchQueue.main.async {
             self.cityList = list
             self.tableView.reloadData()
+            self.activityIndicator.stopAnimating()
         }
     }
     
@@ -35,12 +36,16 @@ class SearchViewController: UITableViewController,UISearchBarDelegate,ServiceDel
         print(searchText)
         Service.shared.delegate = self
         self.activityIndicator.startAnimating()
-        Service.shared.fetchJSONData(searchText: searchText)
-        self.activityIndicator.stopAnimating()
-        tableView.reloadData()
-        /*
-         
-         */
+        Service.shared.fetchJSONData(searchText: searchText, completionHandler: { error in
+       
+            
+            if let error = error {
+                print("error:\(String(describing: error.localizedDescription))")
+                print(error)
+                return
+            }
+        }
+        )
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

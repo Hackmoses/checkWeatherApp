@@ -18,8 +18,8 @@ class Service {
     var delegate : ServiceDelegate?
     
     
-    func fetchJSONData(searchText:String)  {
-        
+   // func fetchJSONData(searchText:String)  {
+    func fetchJSONData(searchText:String, completionHandler : @escaping (Error?)->Void)  {
         
         let url = URL(string: "http://gd.geobytes.com/AutoCompleteCity?q=\(searchText)")!
         
@@ -27,12 +27,6 @@ class Service {
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
-            
-            if let error = error {
-                print("error in url session")
-                print(error)
-                return
-            }
             
             // We want to ensure that we have a good HTTP response status
             guard let httpResponse = response as? HTTPURLResponse,
@@ -45,7 +39,12 @@ class Service {
                 return
             }
             
-            if let data = data {
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completionHandler(error)
+                }
+                return
+            }
                 
                 // Create and configure a JSON decoder
                 let decoder = JSONDecoder()
@@ -61,7 +60,6 @@ class Service {
                     print(result)
                     
                     // Save the data (in memory)
-                    //  completionHandler(result)
                     
                     // Then reload the table view; must be done this way
                     
@@ -69,8 +67,11 @@ class Service {
                 catch {
                     print("error exception in url session")
                     print(error)
+                    
                 }
-            }
+            
+            
+           
         }
         
         // Now that "task" has been fully defined, execute it...

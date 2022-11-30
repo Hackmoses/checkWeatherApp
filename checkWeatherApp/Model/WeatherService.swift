@@ -17,7 +17,6 @@ class WeatherService {
     
                 let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=b4cb98807ba7bc852f39047637f2b59e&units=metric")
                         
-          
                         print(url)
         
                        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in

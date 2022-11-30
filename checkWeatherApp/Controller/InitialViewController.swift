@@ -17,7 +17,6 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
     @IBOutlet var btn_add: UIBarButtonItem!
     
     
-    
     var fetchedResultsController: NSFetchedResultsController<CityDb>!
     
     var myFetchResultsController = CoreDataManager.shared.myFetchResultsController
@@ -29,7 +28,7 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
         tableView.dataSource = self
         
         setUpFetchedResultController()
-        // Do any additional setup after loading the view.
+       
         // self.tableView.register(initialTableViewCell.self, forCellReuseIdentifier: "cell")
         
     }
