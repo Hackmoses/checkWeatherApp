@@ -12,7 +12,7 @@ import Foundation
 class WeatherService {
 
 
-    func fetchWeatherData(city:String, completionHandler : @escaping (WeatherModel)->Void )  {
+    func fetchWeatherData(city:String, completionHandler : @escaping (WeatherModel, Error? )->Void )  {
 
     
                 let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=b4cb98807ba7bc852f39047637f2b59e&units=metric")
@@ -55,7 +55,7 @@ class WeatherService {
                                 print(result)
                                
                                    // Save the data (in memory)
-                                completionHandler(result)
+                                completionHandler(result, error)
                               
                                    // Then reload the table view; must be done this way
                                    

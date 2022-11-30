@@ -13,80 +13,80 @@ import UIKit
 var allCity : [CityDb] = [CityDb]()
 
 class InitialViewController: UITableViewController,NSFetchedResultsControllerDelegate, UISearchBarDelegate {
-
+    
     @IBOutlet var btn_add: UIBarButtonItem!
     
-  
+    
     
     var fetchedResultsController: NSFetchedResultsController<CityDb>!
-        
+    
     var myFetchResultsController = CoreDataManager.shared.myFetchResultsController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         tableView.delegate = self
         tableView.dataSource = self
-       
+        
         setUpFetchedResultController()
         // Do any additional setup after loading the view.
-       // self.tableView.register(initialTableViewCell.self, forCellReuseIdentifier: "cell")
-       
+        // self.tableView.register(initialTableViewCell.self, forCellReuseIdentifier: "cell")
+        
     }
-
-   override func numberOfSections(in tableView: UITableView) -> Int {
-       // #warning Incomplete implementation, return the number of sections
-     
-           return fetchedResultsController.sections?.count ?? 1
-       
-
-   }
-
-   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       // #warning Incomplete implementation, return the number of rows
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        
+        return fetchedResultsController.sections?.count ?? 1
+        
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
         setUpFetchedResultController()
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
-       
-       
-   }
-  
+        
+        
+    }
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Clickecd on : \(indexPath.row)")
         let weatherViewController = storyboard?.instantiateViewController(identifier: "WeatherViewController") as? WeatherViewController
         weatherViewController?.city =
         fetchedResultsController.object(at: indexPath).cityName
-       self.navigationController?.pushViewController(weatherViewController!, animated: true)
-   }
-   
-   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    print("loaded :\(indexPath)")
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! initialTableViewCell
-      
-    cell.setData(model: fetchedResultsController.object(at: indexPath))
-    return cell
-     
-   }
-   
-
-   // Override to support editing the table view.
-   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-       if editingStyle == .delete {
-        print("\(fetchedResultsController.object(at: indexPath))")
-          CoreDataManager.shared.deleteCity(city: fetchedResultsController.object(at: indexPath))
+        self.navigationController?.pushViewController(weatherViewController!, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("loaded :\(indexPath)")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! initialTableViewCell
+        
+        cell.setData(model: fetchedResultsController.object(at: indexPath))
+        return cell
+        
+    }
+    
+    
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("\(fetchedResultsController.object(at: indexPath))")
+            CoreDataManager.shared.deleteCity(city: fetchedResultsController.object(at: indexPath))
             //fetchAllCity()
-           
-       }
-   }
+            
+        }
+    }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-          return 1
-      }
+        return 1
+    }
     
     override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
         setUpFetchedResultController()
-       // fetchAllCity()
+        // fetchAllCity()
         tableView.reloadData()
     }
     
@@ -99,8 +99,8 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let newContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         /*
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        dataController = appDelegate.dataController
+         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+         dataController = appDelegate.dataController
          */
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: newContext, sectionNameKeyPath: "cityName", cacheName: nil)
         fetchedResultsController.delegate = self
@@ -112,8 +112,8 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
         
         
         
-}
+    }
     
-
+    
 }
 
