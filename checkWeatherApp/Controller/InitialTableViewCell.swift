@@ -9,11 +9,7 @@ import Foundation
 import UIKit
 
 class initialTableViewCell: UITableViewCell {
-/*
-    @IBOutlet var txt_title: UILabel!
-    @IBOutlet var txt_subtitle: UILabel!
-*/
-    
+
     @IBOutlet weak var cityLabel: UILabel!
     
     @IBOutlet weak var countryLabel: UILabel!

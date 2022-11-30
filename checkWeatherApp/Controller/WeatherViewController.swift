@@ -22,8 +22,7 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchWeatherData()
-        // Do any additional setup after loading the view.
-    }
+            }
     
     func fetchWeatherData(){
         

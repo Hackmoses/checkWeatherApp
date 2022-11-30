@@ -16,10 +16,7 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
 
     @IBOutlet var btn_add: UIBarButtonItem!
     
-    @IBOutlet var searchBar: UISearchBar!
-    
-    //var dataController : DataController!
-
+  
     
     var fetchedResultsController: NSFetchedResultsController<CityDb>!
         
@@ -27,10 +24,10 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //fetchAllCity()
+      
         tableView.delegate = self
         tableView.dataSource = self
-        searchBar.delegate = self
+       
         setUpFetchedResultController()
         // Do any additional setup after loading the view.
        // self.tableView.register(initialTableViewCell.self, forCellReuseIdentifier: "cell")
@@ -92,14 +89,7 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
        // fetchAllCity()
         tableView.reloadData()
     }
-    /*
-    func fetchAllCity()
-    {
-        
-        allCity = CoreDataManager.shared.fetchCityFromCoreData()
-        tableView.reloadData()
-    }
-    */
+    
     //Set up a fetch Controller
     func setUpFetchedResultController(){
         
@@ -126,43 +116,4 @@ class InitialViewController: UITableViewController,NSFetchedResultsControllerDel
     
 
 }
-extension InitialViewController {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if (searchText == ""){
-            //try? myFetchResultsController.performFetch()
-           // tableView.reloadData()
-            //fetchAllCity()
-            setUpFetchedResultController()
-        }
-        else {
-           // allCity = CoreDataManager.shared.search(text: searchText)
-            //setUpFetchedResultController()
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let newContext: NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-            let fetchRequest : NSFetchRequest<CityDb> = CityDb.fetchRequest()
-            var predicate:NSPredicate = NSPredicate()
-            predicate = NSPredicate(format: "name LIKE %@", searchBar.text!)
-            let sortDescriptor = NSSortDescriptor(key: "cityName", ascending: true)
-            fetchRequest.sortDescriptors = [sortDescriptor]
-            fetchedResultsController?.fetchRequest.predicate = predicate
-            
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: newContext, sectionNameKeyPath: "cityName", cacheName:"cityName")
-            
-            
-            do{
-                print("Searching data data")
-                try fetchedResultsController?.performFetch()
-                tableView.reloadData()
-            }catch{
-                print("Error")
-            }
-            
-
-        }
-    }
-    
-    
-}
-    
 
