@@ -14,12 +14,19 @@ class WeatherService {
 
     func fetchWeatherData(city:String, completionHandler : @escaping (WeatherModel, Error? )->Void )  {
 
+        /*let stringUrl = "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=b4cb98807ba7bc852f39047637f2b59e&units=metric".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+         
+         var url = URL(string:stringUrl)!
+        
+         */
+        
+        var urlString = city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
     
-                let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=b4cb98807ba7bc852f39047637f2b59e&units=metric")
-                        
+                var url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(urlString!)&appid=b4cb98807ba7bc852f39047637f2b59e&units=metric")!
+                    
                         print(url)
         
-                       let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+                       let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
                            
                          
                            if let error = error {

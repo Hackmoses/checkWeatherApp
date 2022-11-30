@@ -21,7 +21,9 @@ class Service {
    // func fetchJSONData(searchText:String)  {
     func fetchJSONData(searchText:String, completionHandler : @escaping (Error?)->Void)  {
         
-        let url = URL(string: "http://gd.geobytes.com/AutoCompleteCity?q=\(searchText)")!
+        var urlStrings = searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        let url = URL(string: "http://gd.geobytes.com/AutoCompleteCity?q=\(urlStrings!)")!
         
         print(url)
         

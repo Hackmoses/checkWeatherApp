@@ -37,10 +37,15 @@ class SearchViewController: UITableViewController,UISearchBarDelegate,ServiceDel
         Service.shared.delegate = self
         self.activityIndicator.startAnimating()
         Service.shared.fetchJSONData(searchText: searchText, completionHandler: { error in
-       
+            
             
             if let error = error {
                 print("error:\(String(describing: error.localizedDescription))")
+                self.activityIndicator.stopAnimating()
+                let alert = UIAlertController.init(title: "Connection failed", message: "Check you network connection", preferredStyle: .alert)
+                let cancelAction = UIAlertAction.init(title: "Retry", style: .default)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
                 print(error)
                 return
             }
@@ -105,3 +110,4 @@ class SearchViewController: UITableViewController,UISearchBarDelegate,ServiceDel
     
     
 }
+
